@@ -1,0 +1,8 @@
+#include <iostream>
+
+int main(int main, char** argv){
+
+    std::cout << "Hello World!" << std::endl;
+
+    return 0;
+}

@@ -1,0 +1,19 @@
+OUTPUT = project_exec
+SOURCES = $(wildcard src/*.c)
+OBJECTS = $(SOURCES:.c=.o)
+FLAGS = -g
+
+
+$(OUTPUT): $(OBJECTS)
+	gcc $(OBJECTS) $(FLAGS) -o $(OUTPUT)
+
+%.o: %.c include/%.h
+	gcc -c $(FLAGS) $< -o $@
+
+install:
+	make
+	cp ./project_exec /usr/local/bin/project
+
+clean:
+	-rm *.out 
+	-rm src/*.o
