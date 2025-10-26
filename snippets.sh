@@ -1,5 +1,15 @@
 #!/bin/bash
 
+parse_command()
+{
+	if [ $1 = "list" ]; then
+		while IFS=';' read -r -a lines; do
+			echo -e "${lines[0]}: ${lines[1]}\t\t ${lines[2]}"	
+		done < "templates.txt"
+		echo -e "\nPlease select a snippet to copy to your clipboard:"
+	fi
+}
+
 copy_snippet()
 {
     if [ $1 = "1" ]; then
@@ -18,12 +28,11 @@ copy_snippet()
 }
 
 if [ $# -eq 0 ]; then
-    echo "1: Makefile       (Generic Makefile for C/CPP)"
-    echo "2: HelloC         (Hello world for C)"
-    echo "3: HelloCPP    (Hello world for CPP)"
-	echo "install: copy local templates to /usr/local/lib/snippets for universal access"
-    echo ""
-	echo "Which Snippet would you like to chose?"   
+    echo "Enter \"list\" to display the list of available templates"
+	echo "Enter \"help\" to display avilable commands"
+	read cmd
+	parse_command $cmd	
+
     read snippet
     copy_snippet $snippet
 else
