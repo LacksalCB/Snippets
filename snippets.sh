@@ -11,14 +11,19 @@ copy_snippet()
     elif [ $1 = "3" ]; then
         echo "Copying CPP Hello World to Clipboard!"
         xclip /usr/local/lib/snippets/Hello_CPP.txt -selection c
+	elif [ $1 = "install" ]; then
+		echo "Copying templates to lib director"
+		mv templates/* /usr/local/lib/snippets/
     fi
 }
 
 if [ $# -eq 0 ]; then
     echo "1: Makefile       (Generic Makefile for C/CPP)"
     echo "2: HelloC         (Hello world for C)"
-    echo -e "3: HelloCPP    (Hello world for CPP)\n"
-    echo "Which Snippet would you like to chose?"   
+    echo "3: HelloCPP    (Hello world for CPP)"
+	echo "install: copy local templates to /usr/local/lib/snippets for universal access"
+    echo ""
+	echo "Which Snippet would you like to chose?"   
     read snippet
     copy_snippet $snippet
 else
